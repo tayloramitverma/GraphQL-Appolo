@@ -6,14 +6,14 @@ export const typeDefs = `#graphql
 
   # This "User" type defines the queryable fields for every user in our data source.
   type User {
-    id:ID!
+    _id:ID!
     firstName:String
     lastName:String
     email:String
     password:String
     books:[Book]
   }
-  
+
   # This "Book" type defines the queryable fields for every book in our data source.
   type Book {
     title: String
@@ -26,19 +26,41 @@ export const typeDefs = `#graphql
 
   type Query {
     users:[User]
-    books:[Book]
-    user(id:ID!):User
-    ibook(id:ID!):[Book]
+    user(_id:ID!):User
+    books:[BookWithName]
+    ibook(_id:ID!):[Book]
+    myprofile: User
   }
 
   type Mutation {
-    signupUser(userNew:userInput!):User
+    signupUser(userSignup:signupUserInput!):User
+    signinUser(userSignin:signinUserInput!):Token
+    createBook(name:String):String
   }
 
-  input userInput{
-     firstName:String!
-     lastName:String!
-     email:String!
-     password:String!
+  type Token {
+    token:String!
   }
+
+  input signupUserInput {
+    firstName:String!
+    lastName:String!
+    email:String!
+    password:String!
+  }
+
+  input signinUserInput {
+    email:String!
+    password:String!
+ }
+
+ type BookWithName {
+  title:String
+  author:IdName
+}
+
+type IdName {
+  _id: String
+  firstName:String
+}
 `;
