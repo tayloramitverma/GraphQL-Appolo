@@ -9,24 +9,34 @@ export default function Profile() {
   if (!localStorage.getItem("token")) {
     navigation("/");
   }
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <h1 className="text-center font-bold">Loading...</h1>;
   if (error) throw new Error(error);
 
   return (
-    <div className="container my-container">
-      <div className="center-align">
-        <img
-          className="circle"
-          style={{ border: "2px solid", marginTop: "10px" }}
-          src={`https://robohash.org/${data.myprofile.firstName}.png?size=200x200`}
-          alt="pic"
-        />
-        <h5>{`${data.myprofile.firstName} ${data.myprofile.lastName}`}</h5>
-        <h6>Email - {data.myprofile.email}</h6>
+    <div className="container items-center mx-auto p-8 flex justify-center flex-col mt-8">
+      <div className="relative rounded-xl overflow-auto p-8 w-full md:w-2/4">
+        <div className="overflow-visible relative max-w-sm mx-auto bg-white shadow-lg ring-1 ring-black/5 rounded-xl flex items-center gap-6 dark:bg-slate-800 dark:highlight-white/5">
+          <img
+            alt=""
+            className="bg-white absolute -left-6 w-24 h-24 rounded-full shadow-lg"
+            src={`https://robohash.org/${data.myprofile.firstName}.png?size=200x200&set=set4`}
+          />
+          <div className="flex flex-col py-5 pl-24">
+            <strong className="text-slate-900 text-sm font-medium dark:text-slate-200">
+              {`${data.myprofile.firstName} ${data.myprofile.lastName}`}
+            </strong>
+            <span className="text-slate-500 text-sm font-medium dark:text-slate-400">
+              {data.myprofile.email}
+            </span>
+          </div>
+        </div>
       </div>
-      <h3>Your quotes</h3>
+      <h3 className="mb-4 font-bold">Your Books</h3>
       {data.myprofile.books.map((book, index) => (
-        <blockquote key={index}>
+        <blockquote
+          key={index}
+          className="flex justify-between items-center p-4 bg-slate-50 mb-2 w-full md:w-2/4"
+        >
           <h6>{book.title}</h6>
         </blockquote>
       ))}

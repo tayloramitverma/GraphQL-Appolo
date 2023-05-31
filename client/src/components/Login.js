@@ -8,14 +8,14 @@ export default function Login() {
   const [formData, setFormData] = useState({});
   const [signinUser, { data, loading, error }] = useMutation(SIGNIN_USER);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="text-center font-bold">Loading...</div>;
   if (error)
     return (
-      <div className="red card-panel">{`Submission error! ${error.message}`}</div>
+      <div className="text-center font-bold text-red-400">{`Submission error! ${error.message}`}</div>
     );
   if (data && data.user) {
     localStorage.setItem("token", data.user.token);
-    navigate("/");
+    navigate("/home");
   }
 
   const handleChange = (e) => {
@@ -36,15 +36,16 @@ export default function Login() {
   };
 
   return (
-    <div className="container my-container">
-      <h5>Login!!</h5>
-      <form onSubmit={handleSubmit}>
+    <div className="container mx-auto p-8 flex items-center justify-center flex-col mt-8">
+      <h5 className="my-4 font-bold">Login!!</h5>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="email"
           placeholder="email"
           name="email"
           onChange={handleChange}
           required
+          className="outline py-2 px-4 outline-offset-2 outline-slate-200 rounded-md"
         />
         <input
           type="password"
@@ -52,8 +53,12 @@ export default function Login() {
           name="password"
           onChange={handleChange}
           required
+          className="outline py-2 px-4 outline-offset-2 outline-slate-200 rounded-md"
         />
-        <button className="btn #673ab7 deep-purple" type="submit">
+        <button
+          className="px-4 py-2 font-semibold text-sm bg-violet-500 text-white rounded-md shadow-sm hover:scale-125 ease-in-out duration-300"
+          type="submit"
+        >
           Login
         </button>
       </form>

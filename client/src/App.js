@@ -1,13 +1,11 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
-import { routes } from "./routes";
-import { useRoutes } from "react-router";
+import Test from "./components/Form";
+
 function App() {
-  const element = useRoutes(routes);
   return (
     <div>
-      <NavBar />
-      {element}
+      <h1>Test Case</h1>
+      <Test />
     </div>
   );
 }
